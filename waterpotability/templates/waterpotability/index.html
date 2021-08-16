@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" />
+    <title>Home page</title>
+  </head>
+  <body>
+    <h2>Water Potability prediction</h2>
+    <form action="" method="POST">
+      {% csrf_token %}
+      
+      <p id="p">pH Level:</p>
+      <input id="input" type="text" name="ph">
+      <br>
+
+      <p id="p">Hardness:</p>
+      <input id="input" type="text" name="Hardness">
+      <br>
+
+      <p id="p">Solid Content:</p>
+      <input id="input" type="text" name="Solids">
+      <br>
+
+      <p id="p">Chloramines:</p>
+      <input id="input" type="text" name="Chloramines">
+      <br>
+
+      <p id="p">Sulfate:</p>
+      <input id="input" type="text" name="Sulfate">
+      <br>
+
+      <p id="p">Conductivity:</p>
+      <input id="input" type="text" name="Conductivity">
+      <br>
+
+      <p id="p">Organic Carbon Content:</p>
+      <input id="input" type="text" name="Organic_carbon">
+      <br>
+
+      <p id="p">Trihalomethanes:</p>
+      <input id="input" type="text" name="Trihalomethanes">
+      <br>
+
+      <p id="p">Turbidity Level:</p>
+      <input type="text" name="Turbidity">
+      <br>
+
+      <input type="submit" value='Get Predictions'>
+    </form>
+    <p>Prediction: {{prediction}}</p>
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'signup' %}">SignUp</a>
+    
+    
+  </body>
+</html>

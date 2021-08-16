@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css"/>
+</head>
+
+<body>
+<h2>Please login</h2>
+
+<form class="login" method="post">
+  <div>
+    {% csrf_token %}
+    <label>Username : </label>
+    <input type="text" placeholder="Enter Username" name="username" required>
+    <label>Password : </label>
+    <input type="password" placeholder="Enter Password" name="password" required><br>
+    {{form.as_p}}
+    <input type="submit" value="Login"/>
+  </div>
+
+</form>
+</body>
+</html>
+
+
