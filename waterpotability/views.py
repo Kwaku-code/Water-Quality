@@ -1,7 +1,4 @@
-# from WaterQuality.waterpotability.models import Potability
-# from WaterQuality.waterpotability.models import Potability
 from django.shortcuts import redirect, render
-from django.db.models import Sum, F
 from django.contrib.auth import logout
 from django.http import HttpResponse
 from django.contrib.auth import authenticate
@@ -13,10 +10,8 @@ from django.views.generic.list import ListView
 
 
 from.models import Variables
-# from .forms import SignUpCreateForm, LoginCreateForm, EnterVariablesForm, ResultsForm 
-
 import pickle
-# our home page view
+
 
 
 def home(request):
@@ -53,8 +48,6 @@ def home(request):
     return render(request, 'waterpotability/index.html', context)
 
 
-
-# custom method for generating predictions
 def getPredictions(input_var):
     print("Model Loaded Successfully")
     model = pickle.load(open("waterpotability/waterpotability.sav", "rb"))
@@ -72,13 +65,6 @@ def getPredictions(input_var):
         return "error"
 
 
-# our result page view
-def result(request):
-    
-    return render(request, 'result.html', {'result': result})
-
-
-
 def login_view(request):
   context = {
     "login_view": "active"
@@ -86,7 +72,6 @@ def login_view(request):
   if request.method == "POST":
     username = request.POST["username"]
     password = request.POST["password"]
-    # Add your code below:
     user = authenticate(request, username=username, password=password)
     if user is not None:
         results = Variables.objects.all()
@@ -100,53 +85,14 @@ class Database(LoginRequiredMixin, ListView):
     model = Variables
     template_name = "waterpotability/database.html"
 
-# def SignUp(request):
-#   context = {
-#       "SignUp": "active"
-#   }
-#   if request.method == "POST":
-#      username = request.POST["username"]
-#      password = request.POST["password"]
-#      if user is not None:
-#       return redirect("home")
-#     else:
-#       return HttpResponse("invalid credentials")
-#   return render(request, "registration/signup.html", context)
-  
 
-
-# class PotabilityView(ListView):
-#     model = Potability
-#     template_name = waterpotability/database.html
   
 class SignUp(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')
     template_name = "registration/signup.html"
-   
-  
 
-# class Login(CreateView):
-#     model = Login
-#     success_url = reverse_lazy('result')
-#     template_name = "registration/login.html"
-#     form_class = LoginCreateForm
-
-
-# class EnterVariablesView(CreateView):
-#     model = EnterVariables
-#     success_url = reverse_lazy('result.html')
-#     template_name = "waterpotability/index.html"
-#     form_class = EnterVariablesForm
-
-# class ResultsView(CreateView):
-#     model = Potability
-#     success_url = reverse_lazy('index.html')
-#     template_name = "waterpotability/result.html"
-#     form_class = ResultsForm
  
 def log_out(request):
     logout(request)
     return redirect("home")
-
-
